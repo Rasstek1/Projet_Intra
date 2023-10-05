@@ -13,7 +13,7 @@
 <!-- Menu -->
 <ul id="menu">
     <li><a href="${pageContext.request.contextPath}/accueil">Accueil</a></li>
-    <li><a href="${pageContext.request.contextPath}/achat/listeLivres">Achat</a></li>
+    <li><a href="${pageContext.request.contextPath}/achat/listeLivres">Liste de livres</a></li>
     <li><a href="${pageContext.request.contextPath}/admin/ajouterLivre">Administration</a></li>
 </ul>
 </body>

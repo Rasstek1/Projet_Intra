@@ -15,7 +15,8 @@
     <p>Nous vous présentons une liste de livres disponibles :</p>
 
     <!-- Affichage du nombre d'éléments dans le panier -->
-    <p>Nombre d'éléments dans le panier : ${panier.size()}</p>
+    <p>Nombre d'éléments dans le panier : ${panier.liste.size()}</p>
+
 
     <!-- Lien pour voir le panier -->
     <a href="${pageContext.request.contextPath}/achat/afficherPanier">Voir mon Panier</a>
@@ -48,7 +49,12 @@
                             <span>Livre dans le Panier</span>
                         </c:when>
                         <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/achat/acheterLivre?isbn=${livre.isbn}">Acheter</a>
+                            <!-- Lien pour acheter le livre avec formulaire de quantité -->
+                            <form action="${pageContext.request.contextPath}/achat/acheterLivre" method="get">
+                                <input type="hidden" name="isbn" value="${livre.isbn}">
+                                <input type="number" name="quantite" value="1" min="1">
+                                <button type="submit">Acheter</button>
+                            </form>
 
                         </c:otherwise>
                     </c:choose>
@@ -56,6 +62,11 @@
             </tr>
         </c:forEach>
     </table>
+    <!-- Erreur quantite de livres -->
+    <c:if test="${not empty erreurStock}">
+        <p class="erreur">${erreurStock}</p>
+    </c:if>
+
 </div>
 
 <jsp:include page="footer.jsp" />

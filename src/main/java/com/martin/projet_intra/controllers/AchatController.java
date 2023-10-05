@@ -9,22 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/achat")
 @SessionAttributes("panier")
 public class AchatController {
 
-
-
     @Autowired
     private LibrairieDataContext librairieDataContext;
 
-
-
     @GetMapping("/listeLivres")
-    public String listeLivres(Model model) {
+    public String listeLivres(Model model, HttpSession session) {
         model.addAttribute("livres", librairieDataContext.selectLivres());
+        getPanier(session); // S'assure que le panier est initialisé
         return "listeLivres";
     }
 
@@ -38,29 +36,34 @@ public class AchatController {
     }
 
     @GetMapping("/acheterLivre")
-    public String acheterLivre(@RequestParam String isbn, HttpSession session) {
-
-        // Récupérer le panier de la session
-        Panier panier = (Panier) session.getAttribute("panier");
-
-        // Si le panier n'existe pas, le créer
-        if (panier == null) {
-            panier = new Panier();
-        }
-
-        // Récupérer le livre à partir de l'ISBN (La methode selectLivreParIsbn est à créer dans LibrairieDataContext)
+    public String acheterLivre(@RequestParam String isbn, @RequestParam int quantite, HttpSession session, RedirectAttributes redirectAttributes) {
+        Panier panier = getPanier(session);
         Livre livreSelectionne = librairieDataContext.selectLivreParIsbn(isbn);
 
-        // Ajouter le livre au panier
-        LivreAchete livreAchete = new LivreAchete(livreSelectionne.getIsbn(), livreSelectionne.getTitre(), livreSelectionne.getPrix());
-        panier.ajouter(livreAchete);
+        // Vérifier que la quantité est supérieure à 0
+        if (quantite > 0) {
+            // Obtenir la quantité disponible du livre dans la base de données
+            int quantiteDisponible = livreSelectionne.getQuantite();
 
-        // Enregistrer le panier dans la session
-        session.setAttribute("panier", panier);
+            // Vérifier si la quantité demandée est inférieure ou égale à la quantité disponible
+            if (quantite <= quantiteDisponible) {
+                // Ajouter le livre au panier avec la quantité spécifiée
+                for (int i = 0; i < quantite; i++) {
+                    LivreAchete livreAchete = new LivreAchete(livreSelectionne.getIsbn(), livreSelectionne.getTitre(), livreSelectionne.getAuteur(), livreSelectionne.getPrix(), 1); // Quantité fixée à 1
+                    panier.ajouter(livreAchete);
+                }
+                session.setAttribute("panier", panier);
+            } else {
+                // Stock insuffisant, ajoutez un message d'erreur
+                redirectAttributes.addFlashAttribute("erreurStock", "Stock insuffisant. La quantité demandée n'est pas disponible.");
+            }
+        }
 
-        // Rediriger vers la liste des livres
-        return "redirect:/listeLivre";
+        return "redirect:/achat/listeLivres";
     }
+
+
+
 
 
     @GetMapping("/afficherPanier")
@@ -71,20 +74,19 @@ public class AchatController {
 
     @GetMapping("/supprimerLivre")
     public String supprimerLivre(@RequestParam String isbn, HttpSession session) {
+        Panier panier = getPanier(session);
+        panier.supprimer(isbn);
+        session.setAttribute("panier", panier);
+        return "redirect:/achat/afficherPanier";
+    }
 
-        // Récupérer le panier de la session
-        Panier panier = (Panier) session.getAttribute("panier");
+    @GetMapping("/annulerAchat")
+    public String annulerAchat(HttpSession session) {
+        // Supprimer le panier de la session
+        session.removeAttribute("panier");
 
-        if (panier != null) {
-            // Supprimer le livre du panier
-            panier.supprimer(isbn);
-
-            // Remettre à jour le panier dans la session (bien que ce ne soit pas nécessaire car le panier est une référence, c'est une bonne pratique)
-            session.setAttribute("panier", panier);
-        }
-
-        // Rediriger vers la vue du panier
-        return "redirect:/afficherPanier";
+        // Rediriger vers la liste des livres
+        return "redirect:/achat/listeLivres";
     }
 
 
@@ -101,32 +103,18 @@ public class AchatController {
             @RequestParam String email,
             HttpSession session
     ) {
-        // Récupérer le panier de la session
-        Panier panier = (Panier) session.getAttribute("panier");
-
-        // Calculer le montant total HT et les taxes
+        Panier panier = getPanier(session);
         double montantHt = panier.getListe().stream().mapToDouble(LivreAchete::getPrix).sum();
         double tauxTaxe = 0.15; // 15%
         double mtTaxe = montantHt * tauxTaxe;
 
-        // Insérer dans la table Factures
         librairieDataContext.insertFacture(telephone, nomClient, adresse, email, montantHt, mtTaxe);
-
-        // Récupérer le dernier NumFacture inséré
         int dernierNumFacture = librairieDataContext.getLastNumFacture();
-
-        // Insérer chaque livre du panier dans la table DetailsFacture
         for (LivreAchete livre : panier.getListe()) {
             librairieDataContext.insertDetailsFacture(dernierNumFacture, livre.getIsbn(), livre.getPrix());
         }
-
-        // Vider le panier
         panier.getListe().clear();
-
-        // (Optionnel) Si vous souhaitez supprimer le panier de la session après le paiement :
         session.removeAttribute("panier");
-
-        // Rediriger vers la page de confirmation
         return "confirmation";
     }
 }

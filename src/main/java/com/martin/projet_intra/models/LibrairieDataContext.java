@@ -62,7 +62,7 @@ public class LibrairieDataContext {
      * @param mtTaxe Le montant de la taxe
      */
     public void insertFacture(String telephone, String nomClient, String adresse, String email, double montantHt, double mtTaxe) {
-        String sql = "INSERT INTO Factures (Telephone, Nomclient, Adresse, Email, Montantht, Mttaxe, mttotal) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Factures (Telephone, Nomclient, Adresse, Email, MontantHT, MtTaxe, MtTotal) VALUES (?, ?, ?, ?, ?, ?, ?)";
         double mtTotal = montantHt + mtTaxe; // Calcul du montant total
         jdbcTemplate.update(sql, telephone, nomClient, adresse, email, montantHt, mtTaxe, mtTotal);
     }
