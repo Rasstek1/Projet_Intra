@@ -20,8 +20,9 @@
             <th>Prix</th>
             <th>Action</th>
         </tr>
-        <c:forEach var="livre" items="${panier}">
-            <tr>
+        <c:forEach var="livre" items="${panier.liste}">
+
+        <tr>
                 <td>${livre.titre}</td>
                 <td>${livre.prix}</td>
                 <td><a href="supprimerLivre?isbn=${livre.isbn}">Supprimer</a></td>
@@ -30,9 +31,10 @@
     </table>
 
     <!-- Liens pour le paiement, l'annulation et le retour à la liste d'achat -->
-    <a href="paiement">Paiement</a> |
-    <a href="annulerAchat">Annuler</a> |
-    <a href="listeLivres">Retour à la liste d'achat</a>
+    <a href="${pageContext.request.contextPath}/achat/paiement">Paiement</a> |
+    <a href="${pageContext.request.contextPath}/achat/annulerAchat">Annuler</a> |
+    <a href="${pageContext.request.contextPath}/achat/listeLivres">Retour à la liste d'achat</a>
+
 </div>
 
 <jsp:include page="footer.jsp" />

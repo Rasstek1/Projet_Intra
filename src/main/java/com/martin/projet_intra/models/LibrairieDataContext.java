@@ -3,10 +3,11 @@ package com.martin.projet_intra.models;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 public class LibrairieDataContext {
 
     @Autowired

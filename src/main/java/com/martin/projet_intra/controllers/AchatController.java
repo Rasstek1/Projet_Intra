@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @SessionAttributes("panier")
 public class AchatController {
 
-    private static final double TAX_RATE = 0.15;
+
 
     @Autowired
     private LibrairieDataContext librairieDataContext;
@@ -59,7 +59,7 @@ public class AchatController {
         session.setAttribute("panier", panier);
 
         // Rediriger vers la liste des livres
-        return "redirect:/listeLivres";
+        return "redirect:/listeLivre";
     }
 
 
@@ -106,7 +106,7 @@ public class AchatController {
 
         // Calculer le montant total HT et les taxes
         double montantHt = panier.getListe().stream().mapToDouble(LivreAchete::getPrix).sum();
-        double tauxTaxe = 0.15; // 15% par exemple
+        double tauxTaxe = 0.15; // 15%
         double mtTaxe = montantHt * tauxTaxe;
 
         // Insérer dans la table Factures

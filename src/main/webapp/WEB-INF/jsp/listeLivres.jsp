@@ -18,21 +18,28 @@
     <p>Nombre d'éléments dans le panier : ${panier.size()}</p>
 
     <!-- Lien pour voir le panier -->
-    <a href="voirPanier">Voir mon Panier</a>
+    <a href="${pageContext.request.contextPath}/achat/afficherPanier">Voir mon Panier</a>
+
 
     <table border="1">
         <tr>
+            <th>ISBN</th>
             <th>Titre</th>
             <th>Auteur</th>
             <th>Prix</th>
+            <th>Quantité</th>
+            <th>Photo</th>
             <th>Résumé</th>
             <th>Action</th>
         </tr>
-        <c:forEach var="livre" items="${listeLivres}">
+        <c:forEach var="livre" items="${livres}">
             <tr>
+                <td>${livre.isbn}</td>
                 <td>${livre.titre}</td>
                 <td>${livre.auteur}</td>
                 <td>${livre.prix}</td>
+                <td>${livre.quantite}</td>
+                <td>${livre.photo}</td>
                 <td>${livre.resume}</td>
                 <td>
                     <!-- Vérification si le livre est dans le panier -->
@@ -41,7 +48,8 @@
                             <span>Livre dans le Panier</span>
                         </c:when>
                         <c:otherwise>
-                            <a href="acheterLivre?isbn=${livre.isbn}">Acheter</a>
+                            <a href="${pageContext.request.contextPath}/achat/acheterLivre?isbn=${livre.isbn}">Acheter</a>
+
                         </c:otherwise>
                     </c:choose>
                 </td>
