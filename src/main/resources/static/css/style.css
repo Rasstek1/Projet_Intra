@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px; /* Marge à gauche */
+    padding-right: 20px; /* Marge à droite */
+}
+.top-bar {
+    background-color: #4c4c4c;
+    height: 40px; /* Hauteur de la bande */
+    width: 100%; /* Largeur de la bande bord en bord */
+}
+.header-bg {
+    background-color: paleturquoise; /* Couleur de fond du header */
+    padding: 15px; /* Espacement interne du header */
+}
+
+header h2{
+    color: #4c4c4c;
+    font-weight: lighter;
+    padding-right: 20px;
+}
+.logo {
+    max-width: 100px; /* Largeur maximale du logo */
+}
+
+.menu {
+    text-align: center; /* Alignement du menu au centre */
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu ul li {
+    display: inline-block;
+    margin-right: 10px; /* Réduisez la marge à 10px (ou ajustez selon vos préférences) */
+
+}
+.menu ul li:first-child {
+    margin-left: 10px; /* Ajoutez une marge gauche au premier élément */
+}
+
+
+
+.menu a {
+    color: #fff; /* Couleur du texte du menu */
+    text-decoration: none;
+}
+
+.logo-img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-left: 30px;
+}
+
+/* Style de la bannière */
+.banner {
+    background-image: url('../img/Banner.png');
+    background-size: 100% auto; /* Ajuste la largeur à 100% et laisse la hauteur automatique */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image en arrière-plan */
+    height: 200px; /* Réglez la hauteur souhaitée de la bannière */
+}
