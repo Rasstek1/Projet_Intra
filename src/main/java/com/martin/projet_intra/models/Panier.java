@@ -9,14 +9,13 @@ public class Panier {
     private List<LivreAchete> liste;
 
     private double montantTotal;
-    private double montantTaxes;
-    private static final double TAUX_TAXE = 0.15;
 
+    private double montantTaxes;
+    private static final double TAUX_TPS = 0.05;
+    private static final double TAUX_TVQ = 0.09975;
     private int nombreTotalLivres;
 
-    private double MontantHT;
-    private double MtTaxe;
-    private double MtTotal;
+
 
 
     //Le constructeur par défaut qui initialise la liste
@@ -87,20 +86,39 @@ public class Panier {
         return montantTotal;
     }
 
-    public double getMontantTaxes() {
-        return montantTaxes;
-    }
+
     public void recalculerNombreTotalLivres() {
         nombreTotalLivres = liste.size();
     }
 
     public int getNombreTotalLivres() {
-        return nombreTotalLivres;
+        return liste.stream().mapToInt(LivreAchete::getQuantite).sum();
+    }
+    public double getMontantTaxes() {
+        return montantTaxes;
+    }
+
+    public double getTps() {
+        double tps = montantTotal * TAUX_TPS;
+        return Math.round(tps * 100.0) / 100.0; // Arrondir à deux décimales
+    }
+
+    public double getTvq() {
+        double tvq = montantTotal * TAUX_TVQ;
+        return Math.round(tvq * 100.0) / 100.0; // Arrondir à deux décimales
     }
     public void recalculerMontantTotalEtTaxes() {
         montantTotal = liste.stream().mapToDouble(livre -> livre.getPrix() * livre.getQuantite()).sum();
-        montantTaxes = montantTotal * TAUX_TAXE;
+        double tps = montantTotal * TAUX_TPS; // Calcul de la TPS (5%)
+        double tvq = montantTotal * TAUX_TVQ; // Calcul de la TVQ (9,975%)
+        montantTaxes = tps + tvq; // Montant total des taxes
+        montantTotal += montantTaxes; // Montant total avec les taxes
+        montantTotal = Math.round(montantTotal * 100.0) / 100.0; // Arrondir à deux décimales
+        montantTaxes = Math.round(montantTaxes * 100.0) / 100.0; // Arrondir à deux décimales
+        tps = Math.round(tps * 100.0) / 100.0; // Arrondir à deux décimales
+        tvq = Math.round(tvq * 100.0) / 100.0; // Arrondir à deux décimales
     }
+
 
 
 }

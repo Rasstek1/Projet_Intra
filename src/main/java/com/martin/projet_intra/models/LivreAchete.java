@@ -67,4 +67,17 @@ public class LivreAchete {
     public void augmenterQuantite() {
         this.quantite++;
     }
+
+    public double getTps() {
+        return Math.round(prix * quantite * 0.05 * 100.0) / 100.0; // Calcul de la TPS (5%) et arrondissement à deux décimales
+    }
+
+    public double getTvq() {
+        return Math.round(prix * quantite * 0.09975 * 100.0) / 100.0; // Calcul de la TVQ (9,975%) et arrondissement à deux décimales
+    }
+
+    public double getPrixTotal() {
+        return Math.round((prix * quantite + getTps() + getTvq()) * 100.0) / 100.0; // Calcul du Prix Total et arrondissement à deux décimales
+    }
+
 }

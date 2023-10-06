@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +21,10 @@
             <th>Auteur</th>
             <th>Prix</th>
             <th>Quantité</th>
-            <th>Sous-total</th>
-            <th>Taxe</th>
-            <th>Prix Total</th>
+            <th>Sous-Total</th>
+            <th>TPS (5%)</th> <!-- Ajout de la colonne TPS -->
+            <th>TVQ (9.975%)</th> <!-- Ajout de la colonne TVQ -->
+            <th>Prix Total</th> <!-- Calcul du prix total (Sous-total + TPS + TVQ) -->
 
         </tr>
         <c:choose>
@@ -39,13 +41,13 @@
                         <td>${livre.auteur}</td>
                         <td>${livre.prix}</td>
                         <td>${livre.quantite}</td>
-                        <td>${livre.prix * livre.quantite}</td> <!-- Calcul du sous-total -->
-                        <td>${livre.prix * livre.quantite * 0.15}</td> <!-- Calcul de la taxe (15%) -->
-                        <td>${(livre.prix * livre.quantite) + (livre.prix * livre.quantite * 0.15)}</td> <!-- Calcul du prix total (Sous-total + Taxe) -->
-                    </tr>
-
+                        <td>${(livre.prix * livre.quantite)}</td> <!-- Sous-total -->
+                        <td>${livre.getTps()}</td> <!-- TPS (5%) -->
+                        <td>${livre.getTvq()}</td> <!-- TVQ (9.975%) -->
+                        <td>${livre.getPrixTotal()}</td> <!-- Prix Total -->
                         <td><a href="supprimerLivre?isbn=${livre.isbn}">Supprimer</a></td>
                     </tr>
+
                 </c:forEach>
             </c:otherwise>
         </c:choose>
@@ -58,6 +60,7 @@
 </div>
 
 <jsp:include page="footer.jsp" />
+
 </body>
 </html>
 

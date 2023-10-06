@@ -14,8 +14,9 @@
     <h1>Liste des Livres</h1>
     <p>Nous vous présentons une liste de livres disponibles :</p>
 
-    <!-- Affichage du nombre d'éléments dans le panier -->
-    <p>Nombre d'éléments dans le panier : ${panier.liste.size()}</p>
+    <!-- Affichage du nombre total d'articles dans le panier -->
+    <p>Nombre total d'articles dans le panier : ${panier.getNombreTotalLivres()}</p>
+
 
 
     <!-- Lien pour voir le panier -->
