@@ -8,7 +8,7 @@ public class Livre {
     private int quantite;
     private String photo;
     private String resume;
-
+    private String erreurStock;
     public Livre() {}
 
     public Livre(String isbn, String auteur, String titre, double prix, int quantite, String photo, String resume) {
@@ -76,5 +76,13 @@ public class Livre {
 
     public void setResume(String resume) {
         this.resume = resume;
+    }
+
+    public String getErreurStock() {
+        return erreurStock;
+    }
+
+    public void setErreurStock(String erreurStock) {
+        this.erreurStock = erreurStock;
     }
 }

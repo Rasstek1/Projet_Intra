@@ -58,13 +58,11 @@
 
     </div>
 
-<!-- Conteneur global -->
-<div class="container">
     <!-- Contenu de la page -->
     <div id="content">
         <!-- Le contenu de votre page (tableaux, formulaires, etc.) ici -->
     </div>
-</div>
+
 
 </body>
 </html>

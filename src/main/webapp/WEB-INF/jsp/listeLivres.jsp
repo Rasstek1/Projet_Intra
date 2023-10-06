@@ -5,71 +5,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des Livres</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp"/>
 
-<!-- Contenu de la page listeLivres.jsp -->
-<div id="content">
-    <h1>Liste des Livres</h1>
-    <p>Nous vous présentons une liste de livres disponibles :</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Liste des Livres</h1>
+            <p>Nous vous présentons une liste de livres disponibles :</p>
 
-    <!-- Affichage du nombre total d'articles dans le panier -->
-    <p>Nombre total d'articles dans le panier : ${panier.getNombreTotalLivres()}</p>
+            <!-- Affichage du nombre total d'articles dans le panier -->
+            <p>Nombre total d'articles dans le panier : ${panier.getNombreTotalLivres()}</p>
+        </div>
+    </div>
 
-
-
-    <!-- Lien pour voir le panier -->
-    <a href="${pageContext.request.contextPath}/achat/afficherPanier">Voir mon Panier</a>
-
-
-    <table border="1">
-        <tr>
-            <th>ISBN</th>
-            <th>Titre</th>
-            <th>Auteur</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Photo</th>
-            <th>Résumé</th>
-            <th>Action</th>
-        </tr>
+    <div class="row">
         <c:forEach var="livre" items="${livres}">
-            <tr>
-                <td>${livre.isbn}</td>
-                <td>${livre.titre}</td>
-                <td>${livre.auteur}</td>
-                <td>${livre.prix}</td>
-                <td>${livre.quantite}</td>
-                <td>${livre.photo}</td>
-                <td>${livre.resume}</td>
-                <td>
-                    <!-- Vérification si le livre est dans le panier -->
-                    <c:choose>
-                        <c:when test="${panier.contains(livre)}">
-                            <span>Livre dans le Panier</span>
-                        </c:when>
-                        <c:otherwise>
-                            <!-- Lien pour acheter le livre avec formulaire de quantité -->
-                            <form action="${pageContext.request.contextPath}/achat/acheterLivre" method="get">
-                                <input type="hidden" name="isbn" value="${livre.isbn}">
-                                <input type="number" name="quantite" value="1" min="1">
-                                <button type="submit">Acheter</button>
-                            </form>
+            <div class="col-md-4" style="padding-left: 0px;">
+                <div class="book-box">
+                    <img src="${pageContext.request.contextPath}/img/${livre.photo}" alt="${livre.titre}"
+                         style="max-height: 300px; width: auto;">
+                    <h4>${livre.titre}</h4>
+                    <p>Auteur : ${livre.auteur}</p>
+                    <p>Prix : ${livre.prix}</p>
+                    <p>Quantité disponible : ${livre.quantite}</p>
 
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-            </tr>
+                    <form action="${pageContext.request.contextPath}/achat/acheterLivre" method="get" id="acheterForm${livre.isbn}">
+                        <input type="hidden" name="isbn" value="${livre.isbn}">
+                        <div class="col-4">
+                            <input type="number" name="quantite" value="1" min="1" class="form-control"
+                                   style="margin-bottom:10px;">
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-isbn="${livre.isbn}" onclick="preventFormSubmit(event)">Acheter</button>
+
+                    </form>
+
+                    <!-- Lien pour aller au panier -->
+                    <a href="${pageContext.request.contextPath}/achat/afficherPanier" class="btn btn-success" style="margin-top:10px;">Aller au Panier</a>
+                </div>
+            </div>
         </c:forEach>
-    </table>
-    <!-- Erreur quantite de livres -->
-    <c:if test="${not empty erreurStock}">
-        <p class="erreur">${erreurStock}</p>
-    </c:if>
-
+    </div>
 </div>
 
-<jsp:include page="footer.jsp" />
+
+<jsp:include page="footer.jsp"/>
+
+<script>
+    function preventFormSubmit(event) {
+        event.preventDefault();
+        var isbn = event.target.getAttribute('data-isbn');
+        var form = document.getElementById('acheterForm' + isbn);
+        form.submit();
+    }
+</script>
 </body>
 </html>
