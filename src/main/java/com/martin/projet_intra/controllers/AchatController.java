@@ -40,27 +40,43 @@ public class AchatController {
         Panier panier = getPanier(session);
         Livre livreSelectionne = librairieDataContext.selectLivreParIsbn(isbn);
 
-        // Vérifier que la quantité est supérieure à 0
-        if (quantite > 0) {
-            // Obtenir la quantité disponible du livre dans la base de données
-            int quantiteDisponible = livreSelectionne.getQuantite();
-
-            // Vérifier si la quantité demandée est inférieure ou égale à la quantité disponible
-            if (quantite <= quantiteDisponible) {
-                // Ajouter le livre au panier avec la quantité spécifiée
-                for (int i = 0; i < quantite; i++) {
-                    LivreAchete livreAchete = new LivreAchete(livreSelectionne.getIsbn(), livreSelectionne.getTitre(), livreSelectionne.getAuteur(), livreSelectionne.getPrix(), 1); // Quantité fixée à 1
-                    panier.ajouter(livreAchete);
+        // Vérifier que la quantité est supérieure à 0 et que la quantité ne dépasse pas la quantité disponible
+        if (quantite > 0 && quantite <= livreSelectionne.getQuantite()) {
+            // Vérifier si le livre est déjà dans le panier
+            boolean livreDejaDansPanier = false;
+            for (LivreAchete livreAchete : panier.getListe()) {
+                if (livreAchete.getIsbn().equals(isbn)) {
+                    livreDejaDansPanier = true;
+                    break;
                 }
-                session.setAttribute("panier", panier);
-            } else {
-                // Stock insuffisant, ajoutez un message d'erreur
-                redirectAttributes.addFlashAttribute("erreurStock", "Stock insuffisant. La quantité demandée n'est pas disponible.");
             }
+
+            // Si le livre est déjà dans le panier, augmentez simplement sa quantité
+            if (livreDejaDansPanier) {
+                for (LivreAchete livreAchete : panier.getListe()) {
+                    if (livreAchete.getIsbn().equals(isbn)) {
+                        livreAchete.augmenterQuantite();
+                        break;
+                    }
+                }
+            } else {
+                // Si le livre n'est pas dans le panier, ajoutez-le avec la quantité spécifiée
+                LivreAchete livreAchete = new LivreAchete(livreSelectionne.getIsbn(), livreSelectionne.getTitre(), livreSelectionne.getAuteur(), livreSelectionne.getPrix(), quantite, livreSelectionne.getPhoto());
+                panier.ajouter(livreAchete);
+            }
+
+            // Après l'ajout ou l'augmentation, recalculer les montants
+            panier.recalculerMontantTotalEtTaxes();
+        } else {
+            // Stock insuffisant ou quantité invalide, ajoutez un message d'erreur
+            redirectAttributes.addFlashAttribute("erreurStock", "Stock insuffisant ou quantité invalide.");
         }
 
         return "redirect:/achat/listeLivres";
     }
+
+
+
 
 
 
@@ -77,17 +93,16 @@ public class AchatController {
         Panier panier = getPanier(session);
         panier.supprimer(isbn);
         session.setAttribute("panier", panier);
+
+        // Après la suppression, recalculer les montants
+        panier.recalculerMontantTotalEtTaxes();
+
         return "redirect:/achat/afficherPanier";
     }
 
-    @GetMapping("/annulerAchat")
-    public String annulerAchat(HttpSession session) {
-        // Supprimer le panier de la session
-        session.removeAttribute("panier");
 
-        // Rediriger vers la liste des livres
-        return "redirect:/achat/listeLivres";
-    }
+
+
 
 
     @GetMapping("/paiement")
@@ -117,4 +132,19 @@ public class AchatController {
         session.removeAttribute("panier");
         return "confirmation";
     }
+    @GetMapping("/annulerAchat")
+    public String annulerAchat(HttpSession session) {
+        // Récupérez le panier de la session
+        Panier panier = getPanier(session);
+
+        // Videz le panier
+        panier.vider();
+
+        // Redirigez l'utilisateur vers la liste des livres
+        return "redirect:/achat/listeLivres";
+    }
+
+
 }
+
+

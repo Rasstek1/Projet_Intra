@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,17 +34,16 @@
                          style="max-height: 300px; width: auto;">
                     <h4>${livre.titre}</h4>
                     <p>Auteur : ${livre.auteur}</p>
-                    <p>Prix : ${livre.prix}</p>
+                    <p>Prix unitaire : <fmt:formatNumber value="${livre.prix}" pattern="0.00" />$</p>
+
                     <p>Quantité disponible : ${livre.quantite}</p>
 
                     <form action="${pageContext.request.contextPath}/achat/acheterLivre" method="get" id="acheterForm${livre.isbn}">
                         <input type="hidden" name="isbn" value="${livre.isbn}">
                         <div class="col-4">
-                            <input type="number" name="quantite" value="1" min="1" class="form-control"
-                                   style="margin-bottom:10px;">
+                            <input type="number" name="quantite" value="1" min="1" max="${livre.quantite}" class="form-control" style="margin-bottom:10px;" id="quantite${livre.isbn}" onchange="updateQuantity('${livre.isbn}', ${livre.quantite})">
+                            <button type="submit" class="btn btn-primary" onclick="preventFormSubmit('${livre.isbn}', '${livre.quantite}')">Acheter</button>
                         </div>
-                        <button type="submit" class="btn btn-primary" data-isbn="${livre.isbn}" onclick="preventFormSubmit(event)">Acheter</button>
-
                     </form>
 
                     <!-- Lien pour aller au panier -->
@@ -58,11 +58,16 @@
 <jsp:include page="footer.jsp"/>
 
 <script>
-    function preventFormSubmit(event) {
+    function preventFormSubmit(isbn) {
         event.preventDefault();
-        var isbn = event.target.getAttribute('data-isbn');
         var form = document.getElementById('acheterForm' + isbn);
         form.submit();
+    }
+    function updateQuantity(isbn) {
+        var input = document.getElementById('quantite' + isbn);
+        var newQuantity = input.value;
+        // Mettez à jour la quantité dans le panier (vous devrez implémenter cette fonction)
+        updateCartQuantity(isbn, newQuantity);
     }
 </script>
 </body>

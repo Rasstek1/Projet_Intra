@@ -7,17 +7,23 @@ public class LivreAchete {
     private double prix;
     public int quantite;
 
+    private String photo;
+
+    private Livre livre; // Référence au livre
+
+
 
     // Constructeur par défaut
     public LivreAchete() {}
 
     // Constructeur avec paramètres
-    public LivreAchete(String isbn, String titre, String auteur, double prix, int quantite) {
+    public LivreAchete(String isbn, String titre, String auteur, double prix, int quantite, String photo) {
         this.isbn = isbn;
         this.titre = titre;
         this.auteur = auteur;
         this.prix = prix;
         this.quantite = quantite;
+        this.photo = photo;
     }
 
     // Méthodes d'accès
@@ -62,22 +68,27 @@ public class LivreAchete {
         this.quantite = quantite;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     /*Methodes*/
 
     public void augmenterQuantite() {
         this.quantite++;
     }
 
-    public double getTps() {
-        return Math.round(prix * quantite * 0.05 * 100.0) / 100.0; // Calcul de la TPS (5%) et arrondissement à deux décimales
+    public LivreAchete(Livre livre, int quantite) {
+        this.livre = livre;
+        this.quantite = quantite;
     }
 
-    public double getTvq() {
-        return Math.round(prix * quantite * 0.09975 * 100.0) / 100.0; // Calcul de la TVQ (9,975%) et arrondissement à deux décimales
-    }
-
-    public double getPrixTotal() {
-        return Math.round((prix * quantite + getTps() + getTvq()) * 100.0) / 100.0; // Calcul du Prix Total et arrondissement à deux décimales
+    public int getQuantiteInitiale() {
+        return livre.getQuantiteInitiale();
     }
 
 }

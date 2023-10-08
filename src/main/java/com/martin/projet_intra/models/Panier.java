@@ -33,7 +33,7 @@ public class Panier {
         for (LivreAchete livreAchete : liste) {
             if (livreAchete.getIsbn().equals(element.getIsbn())) {
                 // Si le livre est trouvé, augmentez sa quantité et quittez la méthode
-                livreAchete.augmenterQuantite();
+                livreAchete.augmenterQuantite(); // Augmentez la quantité de 1
                 return;
             }
         }
@@ -41,6 +41,7 @@ public class Panier {
         // Si le livre n'est pas déjà dans le panier, ajoutez-le
         liste.add(element);
     }
+
 
     /**
      * La méthode "supprimer"
@@ -107,6 +108,27 @@ public class Panier {
         double tvq = montantTotal * TAUX_TVQ;
         return Math.round(tvq * 100.0) / 100.0; // Arrondir à deux décimales
     }
+
+    public double getSousTotal() {
+        double sousTotal = liste.stream()
+                .mapToDouble(livre -> livre.getPrix() * livre.getQuantite())
+                .sum();
+        return Math.round(sousTotal * 100.0) / 100.0; // Arrondir à deux décimales
+    }
+    public double getTpsTotal() {
+        double tpsTotal = montantTotal * TAUX_TPS;
+        return Math.round(tpsTotal * 100.0) / 100.0; // Arrondir à deux décimales
+    }
+    public double getTvqTotal() {
+        double tvqTotal = montantTotal * TAUX_TVQ;
+        return Math.round(tvqTotal * 100.0) / 100.0; // Arrondir à deux décimales
+    }
+
+    public double getPrixTotal() {
+        return Math.round(montantTotal * 100.0) / 100.0; // Arrondir à deux décimales
+    }
+
+
     public void recalculerMontantTotalEtTaxes() {
         montantTotal = liste.stream().mapToDouble(livre -> livre.getPrix() * livre.getQuantite()).sum();
         double tps = montantTotal * TAUX_TPS; // Calcul de la TPS (5%)
@@ -117,7 +139,11 @@ public class Panier {
         montantTaxes = Math.round(montantTaxes * 100.0) / 100.0; // Arrondir à deux décimales
         tps = Math.round(tps * 100.0) / 100.0; // Arrondir à deux décimales
         tvq = Math.round(tvq * 100.0) / 100.0; // Arrondir à deux décimales
+
+        // Mettre à jour la valeur de montantTotal dans l'objet Panier
+        this.montantTotal = montantTotal;
     }
+
 
 
 
