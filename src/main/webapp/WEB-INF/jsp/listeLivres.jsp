@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<div class="container">
+<div class="container" style="margin-bottom: 200px;">
     <div class="row">
         <div class="col-md-12">
             <h1>Liste des Livres</h1>

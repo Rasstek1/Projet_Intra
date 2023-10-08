@@ -11,9 +11,10 @@ public class Livre {
     private String erreurStock;
 
     private int quantiteInitiale;
+    private int quantiteDisponible;
     public Livre() {}
 
-    public Livre(String isbn, String auteur, String titre, double prix, int quantite, String photo, String resume, String quantiteInitiale) {
+    public Livre(String isbn, String auteur, String titre, double prix, int quantite, String photo, String resume, String quantiteInitiale, String quantiteDisponible) {
         this.isbn = isbn;
         this.auteur = auteur;
         this.titre = titre;
@@ -22,6 +23,7 @@ public class Livre {
         this.photo = photo;
         this.resume = resume;
         this.quantiteInitiale = Integer.parseInt(quantiteInitiale);
+        this.quantiteDisponible = Integer.parseInt(quantiteDisponible);
     }
 
     //Methodes d'acces
@@ -96,4 +98,12 @@ public class Livre {
     public void setQuantiteInitiale(int quantiteInitiale) {
         this.quantiteInitiale = quantiteInitiale;
     }
+    public int getQuantiteDisponible() {
+        return quantiteDisponible;
+    }
+
+    public void setQuantiteDisponible(int quantiteDisponible) {
+        this.quantiteDisponible = quantiteDisponible;
+    }
+
 }

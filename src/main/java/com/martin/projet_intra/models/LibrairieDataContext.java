@@ -1,12 +1,14 @@
 package com.martin.projet_intra.models;
 
+import io.micrometer.common.util.internal.logging.AbstractInternalLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Service
 public class LibrairieDataContext {
 
@@ -27,7 +29,15 @@ public class LibrairieDataContext {
      */
     public void insertLivre(String isbn, String auteur, String titre, double prix, int quantite, String photo, String resume) {
         String sql = "INSERT INTO Livres (Isbn, Auteur, Titre, Prix, Quantite, Photo, Resume) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, isbn, auteur, titre, prix, quantite, photo, resume);
+        AbstractInternalLogger logger = null;
+        logger.info("Inserting a new livre into the database.");
+        try {
+            jdbcTemplate.update(sql, isbn, auteur, titre, prix, quantite, photo, resume);
+            logger.info("Livre inserted successfully.");
+        } catch (Exception e) {
+            logger.error("Error inserting livre into the database: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 
@@ -116,7 +126,16 @@ public class LibrairieDataContext {
     }
 
 
-
+    /**
+     * Vérifier si un ISBN existe déjà dans la base de données.
+     * @param isbn L'ISBN à vérifier
+     * @return true si l'ISBN existe déjà, sinon false
+     */
+    public boolean isbnExiste(String isbn) {
+        String sql = "SELECT COUNT(*) FROM Livres WHERE Isbn = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, isbn);
+        return count > 0;
+    }
 
 
 }
