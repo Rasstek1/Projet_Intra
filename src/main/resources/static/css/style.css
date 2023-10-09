@@ -6,14 +6,40 @@
 
 
 }
-body {
-
+.top-bar {
+    display: flex;          /* Utilisez flexbox pour l'alignement */
+    justify-content: center; /* Centrez les éléments horizontalement */
+    align-items: center;     /* Centrez les éléments verticalement */
+    height: 50px;            /* Exemple de hauteur, à ajuster selon vos besoins */
+    background-color: #f0f0f0; /* Couleur d'exemple, à ajuster selon vos besoins */
 }
 
-#content {
+.heures {
+    display: flex;
+    justify-content: center; /* Centre les éléments horizontalement */
+    width: 100%;
+    color: wheat;
+}
+
+.heures p {
+    margin: 0;
+    margin-right: 20px;     /* Appliquez une marge droite à chaque <p> */
+}
+
+.heures p:last-child {
+    margin-right: 0;        /* Supprimez la marge droite du dernier <p> */
+}
+
+body {
+background-color: #dddddd;
+}
+
+.content {
     margin-left: 150px; /* Marge à gauche */
     margin-right: 150px; /* Marge à droite */
-   padding-bottom:100px;
+    background-color: white;
+    padding-bottom:100px;
+    border: 1px solid #ddd;
 
 
 }
@@ -24,15 +50,41 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    flex-direction: column;
-    color:black;
+    height: 100px;
+
+    color:white;
     margin-top:100px;
 
 }
+.footer-container {
+    display: flex;
+    justify-content: space-between; /* Espacement entre les sections */
+    align-items: center; /* Centrage vertical des éléments */
+    padding: 20px 0; /* Espace au-dessus et au-dessous du footer */
+    background-color: #333; /* Couleur d'arrière-plan, à ajuster selon vos préférences */
+    color: wheat;
+}
+
+.footer-section {
+    flex-basis: 30%; /* Pour diviser le footer en 3 sections approximativement égales */
+    text-align: center; /* Centre le contenu de chaque section */
+}
+
+.footer-links {
+    list-style-type: none; /* Supprime les puces des listes */
+    padding: 0;
+
+}
+.footer-links a {
+    text-decoration: none; /* Pour enlever le soulignement */
+    color: wheat; /* Couleur des liens */
+
+}
+.footer-links li {
+    margin: 5px 0; /* Espacement entre les liens */
+
+}
+
 
 
 .top-bar {
@@ -109,4 +161,22 @@ header h2 {
 
 .content-wrapper {
     margin-bottom: 100px; /* Ajoutez une marge inférieure pour éviter que le footer ne cache le contenu */
+}
+.banner {
+    display: flex; /* Utilisez flexbox pour aligner les éléments horizontalement */
+    align-items: center; /* Centrer verticalement les éléments à l'intérieur de la bannière */
+}
+
+.banner-carousel {
+    width: 30%; /* Ajustez la largeur du carousel */
+    margin-right: 2%; /* Une petite marge à droite pour séparer du contenu suivant si nécessaire */
+}
+
+.carousel-inner img {
+    height: 350px;
+    object-fit: cover;
+}
+.banner-carousel, .banner-carousel * {
+    margin: 0;
+    padding: 0;
 }

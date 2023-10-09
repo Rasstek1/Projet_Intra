@@ -15,46 +15,56 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<div class="container" style="margin-bottom: 200px;">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Liste des Livres</h1>
-            <p>Nous vous présentons une liste de livres disponibles :</p>
+<div class="content">
+    <div class="container" style="margin-bottom: 200px; margin-top:50px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Livres</h1>
 
-            <!-- Affichage du nombre total d'articles dans le panier -->
-            <p>Nombre total d'articles dans le panier : ${panier.getNombreTotalLivres()}</p>
+
+                <!-- Affichage du nombre total d'articles dans le panier -->
+                <p>Nombre total d'articles dans le panier : ${panier.getNombreTotalLivres()}</p>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <c:forEach var="livre" items="${livres}">
-            <div class="col-md-4" style="padding-left: 0px;">
-                <div class="book-box">
-                    <img src="${pageContext.request.contextPath}/img/${livre.photo}" alt="${livre.titre}"
-                         style="max-height: 300px; width: auto;">
-                    <h4>${livre.titre}</h4>
-                    <p>Auteur : ${livre.auteur}</p>
-                    <p>Prix unitaire : <fmt:formatNumber value="${livre.prix}" pattern="0.00"/>$</p>
-                    <p>Quantité disponible : ${livre.quantite}</p>
-                    <form action="${pageContext.request.contextPath}/achat/acheterLivre" method="get" id="acheterForm${livre.isbn}">
-                        <input type="hidden" name="isbn" value="${livre.isbn}">
-                        <div class="col-4">
-                            <input type="number" name="quantite" value="1" min="1" max="${livre.quantite}" class="form-control" style="margin-bottom:10px; height: 40px; text-align: center; width: 100px;" id="quantite${livre.isbn}" onchange="updateQuantity('${livre.isbn}', ${livre.quantite})">
-                            <button type="submit" class="btn btn-primary mb-2">Acheter</button>
+        <div class="row">
+            <c:forEach var="livre" items="${livres}">
+                <div class="col-md-4" style="padding-left: 0px;">
+                    <div class="book-box">
+                        <img src="${pageContext.request.contextPath}/img/${livre.photo}" alt="${livre.titre}"
+                             style="max-height: 300px; width: auto;">
+                        <h4>${livre.titre}</h4>
+                        <p>Auteur : ${livre.auteur}</p>
+                        <p>Prix unitaire : <fmt:formatNumber value="${livre.prix}" pattern="0.00"/>$</p>
+                        <p>Quantité disponible : ${livre.quantite}</p>
+                        <form action="${pageContext.request.contextPath}/achat/acheterLivre" method="get"
+                              id="acheterForm${livre.isbn}">
+                            <input type="hidden" name="isbn" value="${livre.isbn}">
+                            <div class="col-4">
+                                <input type="number" name="quantite" value="1" min="1" max="${livre.quantite}"
+                                       class="form-control"
+                                       style="margin-bottom:10px; height: 40px; text-align: center; width: 100px;"
+                                       id="quantite${livre.isbn}"
+                                       onchange="updateQuantity('${livre.isbn}', ${livre.quantite})">
+                                <button type="submit" class="btn btn-primary mb-2">Acheter</button>
+                            </div>
+                        </form>
+
+                        <div class="d-flex">
+                            <button onclick="downloadPDF('${pageContext.request.contextPath}/pdf/downloadPDF')"
+                                    class="btn btn-warning mb-2"
+                                    style="height: 40px; text-align: center; width: 100px;">Résumé
+                            </button>
+                            <a href="${pageContext.request.contextPath}/achat/afficherPanier" class="btn btn-success"
+                               style="height: 40px; text-align: center; width: 100px; margin-left: 10px;">Panier</a>
                         </div>
-                    </form>
-
-                    <div class="d-flex">
-                        <button onclick="downloadPDF('${pageContext.request.contextPath}/pdf/downloadPDF')" class="btn btn-primary mb-2" style="height: 40px; text-align: center; width: 100px;">Résumé</button>
-                        <a href="${pageContext.request.contextPath}/achat/afficherPanier" class="btn btn-success" style="height: 40px; text-align: center; width: 100px; margin-left: 10px;">Panier</a>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
+
     </div>
-
 </div>
-
 
 <jsp:include page="footer.jsp"/>
 
@@ -76,7 +86,7 @@
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '${pageContext.request.contextPath}/exemple', true);
         xhr.responseType = 'blob';
-        xhr.onload = function() {
+        xhr.onload = function () {
             var blob = xhr.response;
             var link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);

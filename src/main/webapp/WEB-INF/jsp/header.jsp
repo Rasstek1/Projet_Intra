@@ -1,3 +1,8 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="now" value="${java.util.Calendar.getInstance().time}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,18 +10,25 @@
     <meta charset="UTF-8">
     <title>Header</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/gestionPanier.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
-    <script src="${pageContext.request.contextPath}/js/script.js"></script>
     <title>Header</title>
 </head>
 <body>
 <!-- Bande bord en bord -->
-<div class="top-bar"></div>
+<div class="top-bar">
+    <div class="heures">
+        <p>Lundi au Mercredi: 10:00 à 18:00</p>
+        <p>Jeudi et Vendredi: 10:00 à 21:00</p>
+        <p>Samedi: 10:00 à 18:00</p>
+        <p>Dimanche: 10:00 à 17:00</p>
+    </div>
+</div>
+
+
 
     <!-- Header -->
     <header class="header-bg">
@@ -26,7 +38,8 @@
                 <a class="navbar-brand" href="${pageContext.request.contextPath}/accueil">
                     <img src="${pageContext.request.contextPath}/img/Logo.png" alt="Logo" class="logo-img"/>
                 </a>
-                <h2>Librairie Equinox</h2>
+                <h2 class="brand-name" style="color:mediumseagreen;">Librairie Equinox</h2>
+
 
                 <!-- Bouton hamburger -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -54,14 +67,35 @@
 
 
     <!-- Bannière publicitaire -->
-    <div class="banner">
-
+<div class="banner">
+    <div id="carouselExampleIndicators" class="carousel slide banner-carousel" data-bs-ride="carousel">
+        ...
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="${pageContext.request.contextPath}/img/car-item1.jpg" class="d-block w-100" alt="Image 1">
+            </div>
+            <div class="carousel-item">
+                <img src="${pageContext.request.contextPath}/img/car-item2.jpg" class="d-block w-100" alt="Image 2">
+            </div>
+            <div class="carousel-item">
+                <img src="${pageContext.request.contextPath}/img/car-item3.jpg" class="d-block w-100" alt="Image 3">
+            </div>
+            <!-- Ajoutez plus de divs "carousel-item" si vous avez plus d'images -->
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </a>
     </div>
+</div>
+
 
     <!-- Contenu de la page -->
-    <div id="content">
-        <!-- Le contenu -->
-    </div>
+
 
 
 </body>

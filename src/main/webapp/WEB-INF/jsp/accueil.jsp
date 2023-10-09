@@ -6,14 +6,16 @@
     <title>Accueil</title>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp"/>
 
 <!-- Contenu de la page d'accueil -->
-<div id="content">
-    <h1>Bienvenue sur notre site</h1>
-    <p>Ceci est la page d'accueil de notre entreprise. Vous pouvez ajouter du contenu personnalisé ici.</p>
+<div class="content">
+    <div class="container" style="margin-bottom: 200px; margin-top:50px;">
+        <h1>Bienvenue sur notre site</h1>
+        <p>Ceci est la page d'accueil de notre entreprise. Vous pouvez ajouter du contenu personnalisé ici.</p>
+    </div>
 </div>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
