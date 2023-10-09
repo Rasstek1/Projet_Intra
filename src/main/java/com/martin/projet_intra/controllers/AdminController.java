@@ -6,16 +6,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.HtmlUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,26 +33,48 @@ public class AdminController {
     }
 
     @PostMapping("/ajouterLivre")
-    public String ajouterLivre(@ModelAttribute Livre livre, MultipartFile photo) {
+    public String ajouterLivre(@ModelAttribute Livre livre, @RequestParam("photoFile") MultipartFile photoFile, Model model) {
 
         String isbn = HtmlUtils.htmlEscape(livre.getIsbn());
         String auteur = HtmlUtils.htmlEscape(livre.getAuteur());
         String titre = HtmlUtils.htmlEscape(livre.getTitre());
 
-        // Vérifiez si un ISBN identique est déjà présent, si oui, attribuez le prochain numéro disponible
+        // Vérifiez si un ISBN identique est déjà présent
         if (librairieDataContext.isbnExiste(livre.getIsbn())) {
-            livre.setIsbn(generateUniqueISBN());
+            // Ajoutez un message d'erreur au modèle
+            model.addAttribute("errorMessage", "L'ISBN fourni existe déjà. Veuillez fournir un ISBN unique.");
+
+            // Renvoyez l'utilisateur vers la même page avec le message d'erreur
+            return "ajouterLivre";
         }
 
-        String photoFileName = generateUniqueFileName(photo.getOriginalFilename());
-        String imagePath = "src/main/resources/static/img/" + photoFileName; // Chemin complet vers le dossier img
-        try {
-            Files.copy(photo.getInputStream(), Paths.get(imagePath));
-            livre.setPhoto("img/" + photoFileName); // Stockez le chemin relatif dans la base de données
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Gérez l'erreur de téléchargement ici
+        if (!photoFile.isEmpty()) {
+            String originalFilename = photoFile.getOriginalFilename();
+            // Remplacer les espaces par des underscores et supprimer tous les caractères non désirés
+            String safeFilename = originalFilename.replace(" ", "_").replaceAll("[^a-zA-Z0-9\\.\\-]", "");
+
+            String imagePath = "src/main/resources/static/img/" + safeFilename; // Chemin complet vers le dossier img
+
+            try {
+                // Création du dossier s'il n'existe pas
+                File directory = new File("src/main/resources/static/img/");
+                if (!directory.exists()) {
+                    directory.mkdir();
+                }
+
+                // Sauvegarde du fichier
+                Files.copy(photoFile.getInputStream(), Paths.get(imagePath), StandardCopyOption.REPLACE_EXISTING);
+
+                // Mise à jour du champ photo avec uniquement le nom du fichier
+                livre.setPhoto(safeFilename);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Ajoutez ici la gestion d'erreur pour le téléchargement
+                model.addAttribute("errorMessage", "Une erreur s'est produite lors de la sauvegarde de la photo.");
+                return "ajouterLivre";
+            }
         }
+
 
 
         librairieDataContext.insertLivre(

@@ -14,6 +14,7 @@ public class LibrairieDataContext {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    private static final Logger logger = LoggerFactory.getLogger(LibrairieDataContext.class);
 
     //********** Méthodes pour la gestion des livres **********//
 
@@ -29,7 +30,7 @@ public class LibrairieDataContext {
      */
     public void insertLivre(String isbn, String auteur, String titre, double prix, int quantite, String photo, String resume) {
         String sql = "INSERT INTO Livres (Isbn, Auteur, Titre, Prix, Quantite, Photo, Resume) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        AbstractInternalLogger logger = null;
+
         logger.info("Inserting a new livre into the database.");
         try {
             jdbcTemplate.update(sql, isbn, auteur, titre, prix, quantite, photo, resume);

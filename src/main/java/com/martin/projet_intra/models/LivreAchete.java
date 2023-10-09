@@ -87,8 +87,6 @@ public class LivreAchete {
         this.quantite = quantite;
     }
 
-    public int getQuantiteInitiale() {
-        return livre.getQuantiteInitiale();
-    }
+
 
 }

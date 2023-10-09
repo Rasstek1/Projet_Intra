@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 200px;
+    background-color: white;
 
 
 }
@@ -13,6 +14,7 @@ body {
     margin-left: 150px; /* Marge à gauche */
     margin-right: 150px; /* Marge à droite */
    padding-bottom:100px;
+
 
 }
 #footer {

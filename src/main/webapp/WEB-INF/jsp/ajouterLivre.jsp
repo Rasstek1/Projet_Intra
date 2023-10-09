@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +15,21 @@
 
 <!-- Contenu de la page ajouterLivre.jsp -->
 <div class="container" style="margin-bottom: 200px;">
+
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="border p-4">
                 <h1 class="text-center">Ajouter un Livre</h1>
+
+
+
+                <!-- Affichez le message d'erreur s'il existe -->
+                <c:if test="${not empty errorMessage and errorMessage.trim() != ''}">
+                    <div class="alert alert-danger">
+                            ${errorMessage}
+                    </div>
+                </c:if>
+
                 <form action="${pageContext.request.contextPath}/admin/ajouterLivre" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="isbn" class="form-label">ISBN :</label>
@@ -40,7 +53,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="photo" class="form-label">Télécharger la Photo :</label>
-                        <input type="file" id="photo" name="photo" class="form-control" accept="image/*" required>
+                        <input type="file" id="photo" name="photoFile" class="form-control" accept="image/*" required>
                     </div>
                     <div class="mb-3">
                         <label for="resume" class="form-label">Nom du fichier PDF :</label>

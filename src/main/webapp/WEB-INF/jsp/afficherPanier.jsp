@@ -19,7 +19,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<div class="content-wrapper">
+<div class="content-wrapper" style="margin-right:300px; margin-left: 300px; ">
 
     <div id="content" class="cart-box">
         <h1>Panier</h1>
@@ -83,7 +83,8 @@
                         </table>
                         <a href="paiement" class="btn btn-success">Paiement</a>
                         <a href="annulerAchat" class="btn btn-danger">Annuler</a>
-                        <a href="listeLivres" class="btn btn-primary">Retour à la liste d'achat</a>
+                        <a href="listeLivres" class="btn btn-primary" style="margin-top:20px;">Retour à la liste d'achat</a>
+
                     </div>
                 </c:otherwise>
             </c:choose>
