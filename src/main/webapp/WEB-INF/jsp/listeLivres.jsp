@@ -34,24 +34,25 @@
                          style="max-height: 300px; width: auto;">
                     <h4>${livre.titre}</h4>
                     <p>Auteur : ${livre.auteur}</p>
-                    <p>Prix unitaire : <fmt:formatNumber value="${livre.prix}" pattern="0.00" />$</p>
-
+                    <p>Prix unitaire : <fmt:formatNumber value="${livre.prix}" pattern="0.00"/>$</p>
                     <p>Quantité disponible : ${livre.quantite}</p>
-
                     <form action="${pageContext.request.contextPath}/achat/acheterLivre" method="get" id="acheterForm${livre.isbn}">
                         <input type="hidden" name="isbn" value="${livre.isbn}">
                         <div class="col-4">
-                            <input type="number" name="quantite" value="1" min="1" max="${livre.quantite}" class="form-control" style="margin-bottom:10px;" id="quantite${livre.isbn}" onchange="updateQuantity('${livre.isbn}', ${livre.quantite})">
-                            <button type="submit" class="btn btn-primary" onclick="preventFormSubmit('${livre.isbn}', '${livre.quantite}')">Acheter</button>
+                            <input type="number" name="quantite" value="1" min="1" max="${livre.quantite}" class="form-control" style="margin-bottom:10px; height: 40px; text-align: center; width: 100px;" id="quantite${livre.isbn}" onchange="updateQuantity('${livre.isbn}', ${livre.quantite})">
+                            <button type="submit" class="btn btn-primary mb-2">Acheter</button>
                         </div>
                     </form>
 
-                    <!-- Lien pour aller au panier -->
-                    <a href="${pageContext.request.contextPath}/achat/afficherPanier" class="btn btn-success" style="margin-top:10px;">Aller au Panier</a>
+                    <div class="d-flex">
+                        <button onclick="downloadPDF('${pageContext.request.contextPath}/pdf/downloadPDF')" class="btn btn-primary mb-2" style="height: 40px; text-align: center; width: 100px;">Résumé</button>
+                        <a href="${pageContext.request.contextPath}/achat/afficherPanier" class="btn btn-success" style="height: 40px; text-align: center; width: 100px; margin-left: 10px;">Panier</a>
+                    </div>
                 </div>
             </div>
         </c:forEach>
     </div>
+
 </div>
 
 
@@ -63,11 +64,28 @@
         var form = document.getElementById('acheterForm' + isbn);
         form.submit();
     }
+
     function updateQuantity(isbn) {
         var input = document.getElementById('quantite' + isbn);
         var newQuantity = input.value;
         // Mettez à jour la quantité dans le panier (vous devrez implémenter cette fonction)
         updateCartQuantity(isbn, newQuantity);
+    }
+
+    function downloadPDF() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '${pageContext.request.contextPath}/exemple', true);
+        xhr.responseType = 'blob';
+        xhr.onload = function() {
+            var blob = xhr.response;
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'exemple.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+        xhr.send();
     }
 </script>
 </body>

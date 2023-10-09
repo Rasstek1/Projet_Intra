@@ -6,19 +6,14 @@
     <title>Paiement</title>
     <!-- Lien vers Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Personnalisation des styles CSS */
-        .custom-container {
-            margin-top: 50px; /* Marge supérieure personnalisée */
-        }
-    </style>
+
 </head>
 <body>
 <jsp:include page="header.jsp" />
 
-<!-- Contenu de la page paiement.jsp -->
-<div id="content" > <!-- Ajoutez la classe custom-container pour la marge supérieure -->
-    <div class="row justify-content-center"> <!-- Ajoutez la classe justify-content-center pour centrer horizontalement -->
+
+<div class="container" style="margin-bottom: 200px;">
+    <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="border p-4"> <!-- Ajoutez la classe border pour le cadre -->
                 <h1 class="text-center">Paiement</h1>

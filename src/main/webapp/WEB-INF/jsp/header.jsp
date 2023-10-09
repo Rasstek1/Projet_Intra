@@ -26,7 +26,7 @@
                 <a class="navbar-brand" href="${pageContext.request.contextPath}/accueil">
                     <img src="${pageContext.request.contextPath}/img/Logo.png" alt="Logo" class="logo-img"/>
                 </a>
-                <h2>Equinox Library</h2>
+                <h2>Librairie Equinox</h2>
 
                 <!-- Bouton hamburger -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -60,7 +60,7 @@
 
     <!-- Contenu de la page -->
     <div id="content">
-        <!-- Le contenu de votre page (tableaux, formulaires, etc.) ici -->
+        <!-- Le contenu -->
     </div>
 
 
