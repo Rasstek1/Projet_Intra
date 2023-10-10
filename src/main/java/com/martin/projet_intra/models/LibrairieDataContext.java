@@ -138,5 +138,23 @@ public class LibrairieDataContext {
         return count > 0;
     }
 
+    public int getQuantiteLivre(String isbn) {
+        String sql = "SELECT Quantite FROM Livres WHERE Isbn = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, Integer.class, isbn);
+        } catch (Exception e) {
+            logger.error("Error fetching quantity for ISBN " + isbn + ": " + e.getMessage());
+            return 0;
+        }
+    }
+    public void updateQuantiteLivre(String isbn, int nouvelleQuantite) {
+        String sql = "UPDATE Livres SET Quantite = ? WHERE Isbn = ?";
+        try {
+            jdbcTemplate.update(sql, nouvelleQuantite, isbn);
+            logger.info("Quantity updated successfully for ISBN " + isbn);
+        } catch (Exception e) {
+            logger.error("Error updating quantity for ISBN " + isbn + ": " + e.getMessage());
+        }
+    }
 
 }

@@ -125,13 +125,30 @@ public class AchatController {
 
         librairieDataContext.insertFacture(telephone, nomClient, adresse, email, montantHt, mtTaxe);
         int dernierNumFacture = librairieDataContext.getLastNumFacture();
-        for (LivreAchete livre : panier.getListe()) {
-            librairieDataContext.insertDetailsFacture(dernierNumFacture, livre.getIsbn(), livre.getPrix());
+
+        for (LivreAchete livreAchete : panier.getListe()) {
+            String isbn = livreAchete.getIsbn();
+            int quantiteAchete = livreAchete.getQuantite(); // Assurez-vous que votre classe LivreAchete a cette méthode.
+
+            // Récupérer la quantité actuelle du livre dans la base de données
+            int quantiteActuelle = librairieDataContext.getQuantiteLivre(isbn);
+
+            // Mettre à jour la quantité du livre après l'achat
+            int nouvelleQuantite = quantiteActuelle - quantiteAchete;
+            librairieDataContext.updateQuantiteLivre(isbn, nouvelleQuantite);
+
+            // Insérer les détails de la facture
+            librairieDataContext.insertDetailsFacture(dernierNumFacture, isbn, livreAchete.getPrix());
         }
+
         panier.getListe().clear();
         session.removeAttribute("panier");
         return "confirmation";
     }
+
+
+
+
     @GetMapping("/annulerAchat")
     public String annulerAchat(HttpSession session) {
         // Récupérez le panier de la session
