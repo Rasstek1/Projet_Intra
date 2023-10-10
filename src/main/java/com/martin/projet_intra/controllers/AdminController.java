@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/admin")
@@ -71,6 +70,11 @@ public class AdminController {
                 e.printStackTrace();
                 // Ajoutez ici la gestion d'erreur pour le téléchargement
                 model.addAttribute("errorMessage", "Une erreur s'est produite lors de la sauvegarde de la photo.");
+                return "ajouterLivre";
+            }
+            // Vérifiez si le prix contient une virgule
+            if (String.valueOf(livre.getPrix()).contains(",")) {
+                model.addAttribute("errorMessage", "Format du prix invalide. Veuillez utiliser un point comme séparateur décimal.");
                 return "ajouterLivre";
             }
         }

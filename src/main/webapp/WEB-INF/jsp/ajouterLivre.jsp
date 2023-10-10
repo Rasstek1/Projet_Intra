@@ -44,7 +44,7 @@
                             <input type="text" id="titre" name="titre" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="prix" class="form-label">Prix :</label>
+                            <label for="prix">Prix (utilisez un point comme séparateur décimal):</label>
                             <input type="text" id="prix" name="prix" class="form-control" required>
                         </div>
                         <div class="mb-3">
@@ -71,5 +71,15 @@
 </div>
 
 <jsp:include page="footer.jsp"/>
+
+<script>
+    document.getElementById('prix').addEventListener('input', function(e) {
+        if (e.target.value.includes(',')) {
+            alert('Format du prix invalide. Veuillez utiliser un point comme séparateur décimal.');
+            e.target.value = ''; // Efface la valeur entrée
+        }
+    });
+
+</script>
 </body>
 </html>
