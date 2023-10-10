@@ -10,8 +10,7 @@
     <meta charset="UTF-8">
     <title>Header</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
@@ -67,32 +66,9 @@
 
 
     <!-- Bannière publicitaire -->
-<div class="banner">
-    <div id="carouselExampleIndicators" class="carousel slide banner-carousel" data-bs-ride="carousel">
-        ...
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="${pageContext.request.contextPath}/img/car-item1.jpg" class="d-block w-100" alt="Image 1">
-            </div>
-            <div class="carousel-item">
-                <img src="${pageContext.request.contextPath}/img/car-item2.jpg" class="d-block w-100" alt="Image 2">
-            </div>
-            <div class="carousel-item">
-                <img src="${pageContext.request.contextPath}/img/car-item3.jpg" class="d-block w-100" alt="Image 3">
-            </div>
-            <!-- Ajoutez plus de divs "carousel-item" si vous avez plus d'images -->
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Précédent</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Suivant</span>
-        </a>
-    </div>
-</div>
+    <div class="banner">
 
+    </div>
 
     <!-- Contenu de la page -->
 

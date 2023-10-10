@@ -162,21 +162,3 @@ header h2 {
 .content-wrapper {
     margin-bottom: 100px; /* Ajoutez une marge inférieure pour éviter que le footer ne cache le contenu */
 }
-.banner {
-    display: flex; /* Utilisez flexbox pour aligner les éléments horizontalement */
-    align-items: center; /* Centrer verticalement les éléments à l'intérieur de la bannière */
-}
-
-.banner-carousel {
-    width: 30%; /* Ajustez la largeur du carousel */
-    margin-right: 2%; /* Une petite marge à droite pour séparer du contenu suivant si nécessaire */
-}
-
-.carousel-inner img {
-    height: 350px;
-    object-fit: cover;
-}
-.banner-carousel, .banner-carousel * {
-    margin: 0;
-    padding: 0;
-}

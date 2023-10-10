@@ -15,6 +15,6 @@ public class DateController {
         SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         model.addAttribute("currentTime", s.format(date));
-        return "footer";  // Le nom de votre page JSP
+        return "footer";
     }
 }
