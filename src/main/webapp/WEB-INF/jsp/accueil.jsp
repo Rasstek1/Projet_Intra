@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Accueil</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 <jsp:include page="header.jsp"/>

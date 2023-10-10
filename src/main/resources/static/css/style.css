@@ -13,19 +13,19 @@
     align-items: center; /* Centrez les éléments verticalement */
     height: 30px; /* Exemple de hauteur, à ajuster selon vos besoins */
     background-color: #4c4c4c; /* Couleur d'exemple, à ajuster selon vos besoins */
-    font-size: 1em;
+    font-size: 0.85em;
 }
 
 /* Diminue la taille de la police pour les écrans de taille moyenne */
 @media (max-width: 992px) {
     .top-bar {
-        font-size: 0.85em;
+        font-size: 1em;
         height: 60px;
     }
 }
 
 /* Diminue encore plus la taille de la police pour les petits écrans */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .heures p{
         color:transparent;
         display: none;
@@ -123,28 +123,9 @@ header h2 {
     font-weight: lighter;
     padding-right: 20px;
 }
+/*****************************************************/
 
-.logo {
-    max-width: 100px; /* Largeur maximale du logo */
-}
-
-
-.logo-img {
-    max-width: 100px;
-    max-height: 100px;
-    margin-left: 30px;
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-}
-
-.brand-name {
-    margin-left: 10px;  /* Espacement entre le logo et le texte */
-    color: mediumseagreen;
-    font-size: 1.5em;  /* Ajustez selon votre préférence */
-}
+/***********************************************************************************************/
 
 /* Style de la bannière */
 .banner {
@@ -195,9 +176,53 @@ header h2 {
 }
 
 
+/******************************************************************************/
+
+.logo {
+    max-width: 100%; /* Largeur maximale du logo */
+}
+
+
+.logo-img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-left: 10px;
+}
+
+.navbar-brand {
+    width: 250px; /* Ajustez cette valeur en fonction de vos besoins */
+    display: flex; /* Pour aligner horizontalement le logo et le texte */
+    align-items: center; /* Centre verticalement le logo et le texte */
+}
+
+
+.brand-name {
+    margin-left: 10px;  /* Espacement entre le logo et le texte */
+    color: mediumseagreen;
+    font-size: 1.5em;  /* Ajustez selon votre préférence */
+}
+/* Pour la largeur d'écran <= 768px */
+@media (max-width: 768px) {
+    .logo-img {
+        max-width: 60px;      /* Réduction de la taille du logo */
+        max-height: 60px;     /* Réduction de la taille du logo */
+    }
+
+    .navbar-brand {
+        flex-direction: column;  /* Pour mettre le texte sous le logo */
+        align-items: center;     /* Centrage horizontal */
+        width: auto;             /* Laisser la largeur s'adapter automatiquement */
+    }
+
+    .brand-name {
+        margin-left: 0;         /* Retirer l'espacement à gauche */
+        font-size: 1.2em;       /* Réduction de la taille du texte */
+    }
+}
+/****************************************************************************************************
+
+
 /* Styles pour #monNavUnique */
-
-
 #monNavUnique ul {
     list-style: none;
     margin: 0px;
@@ -264,7 +289,17 @@ header h2 {
 #monNavUnique li:last-child a:after {
     background: #1abc9c;
 }
+/* Pour la largeur d'écran <= 992px */
+@media (max-width: 992px) {
+    #monNavUnique li a {
+        border-left: none !important; /* retirer la bordure à gauche */
+        padding: 5px 20px; /* réduction du padding vertical ici */
+    }
 
+    #monNavUnique ul {
+        display: block; /* pour que les liens soient l'un sous l'autre */
+    }
+}
 
 @font-face {
     font-family: 'Lato';
@@ -293,3 +328,6 @@ header h2 {
     font-weight: 700;
     src: local('Lato Bold'), local('Lato-Bold'), url(http://themes.googleusercontent.com/static/fonts/lato/v6/wkfQbvfT_02e2IWO3yYueQ.woff) format('woff');
 }
+
+
+
