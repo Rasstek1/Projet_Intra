@@ -6,43 +6,62 @@
 
 
 }
+
 .top-bar {
-    display: flex;          /* Utilisez flexbox pour l'alignement */
+    display: flex; /* Utilisez flexbox pour l'alignement */
     justify-content: center; /* Centrez les éléments horizontalement */
-    align-items: center;     /* Centrez les éléments verticalement */
-    height: 50px;            /* Exemple de hauteur, à ajuster selon vos besoins */
-    background-color: #f0f0f0; /* Couleur d'exemple, à ajuster selon vos besoins */
+    align-items: center; /* Centrez les éléments verticalement */
+    height: 30px; /* Exemple de hauteur, à ajuster selon vos besoins */
+    background-color: #4c4c4c; /* Couleur d'exemple, à ajuster selon vos besoins */
+    font-size: 1em;
 }
+
+/* Diminue la taille de la police pour les écrans de taille moyenne */
+@media (max-width: 992px) {
+    .top-bar {
+        font-size: 0.85em;
+        height: 60px;
+    }
+}
+
+/* Diminue encore plus la taille de la police pour les petits écrans */
+@media (max-width: 768px) {
+    .heures p{
+        color:transparent;
+        display: none;
+    }
+}
+
+
 
 .heures {
     display: flex;
     justify-content: center; /* Centre les éléments horizontalement */
     width: 100%;
-    color: wheat;
+    color: #ffd071;
 }
 
 .heures p {
     margin: 0;
-    margin-right: 20px;     /* Appliquez une marge droite à chaque <p> */
+    margin-right: 20px; /* Appliquez une marge droite à chaque <p> */
 }
 
 .heures p:last-child {
-    margin-right: 0;        /* Supprimez la marge droite du dernier <p> */
+    margin-right: 0; /* Supprimez la marge droite du dernier <p> */
 }
 
 body {
-background-color: #dddddd;
+    background-color: #dddddd;
 }
 
 .content {
-    margin-left: 150px; /* Marge à gauche */
-    margin-right: 150px; /* Marge à droite */
+    margin-left:6%; /* Marge à gauche */
+    margin-right:6%; /* Marge à droite */
     background-color: white;
-    padding-bottom:100px;
+    padding-bottom: 100px;
     border: 1px solid #ddd;
-
-
 }
+
 #footer {
     background-color: #4c4c4c;
     padding: 20px;
@@ -52,17 +71,18 @@ background-color: #dddddd;
     width: 100%;
     height: 100px;
 
-    color:white;
-    margin-top:100px;
+    color: white;
+    margin-top: 100px;
 
 }
+
 .footer-container {
     display: flex;
     justify-content: space-between; /* Espacement entre les sections */
     align-items: center; /* Centrage vertical des éléments */
     padding: 20px 0; /* Espace au-dessus et au-dessous du footer */
     background-color: #333; /* Couleur d'arrière-plan, à ajuster selon vos préférences */
-    color: wheat;
+
 }
 
 .footer-section {
@@ -75,11 +95,13 @@ background-color: #dddddd;
     padding: 0;
 
 }
+
 .footer-links a {
     text-decoration: none; /* Pour enlever le soulignement */
-    color: wheat; /* Couleur des liens */
+    color:#ffd071; /* Couleur des liens */
 
 }
+
 .footer-links li {
     margin: 5px 0; /* Espacement entre les liens */
 
@@ -87,14 +109,10 @@ background-color: #dddddd;
 
 
 
-.top-bar {
-    background-color: #4c4c4c;
-    height: 40px; /* Hauteur de la bande */
-    width: 100%; /* Largeur de la bande bord en bord */
+header {
+    height: 150px;
 }
-header{
-    height:150px;
-}
+
 .header-bg {
     background-color: paleturquoise; /* Couleur de fond du header */
     padding: 15px; /* Espacement interne du header */
@@ -110,30 +128,6 @@ header h2 {
     max-width: 100px; /* Largeur maximale du logo */
 }
 
-.menu {
-    text-align: center; /* Alignement du menu au centre */
-}
-
-.menu ul {
-    list-style: none;
-    padding: 0;
-}
-
-.menu ul li {
-    display: inline-block;
-    margin-right: 10px; /* Réduisez la marge à 10px (ou ajustez selon vos préférences) */
-
-}
-
-.menu ul li:first-child {
-    margin-left: 10px; /* Ajoutez une marge gauche au premier élément */
-}
-
-
-.menu a {
-    color: #fff; /* Couleur du texte du menu */
-    text-decoration: none;
-}
 
 .logo-img {
     max-width: 100px;
@@ -141,12 +135,48 @@ header h2 {
     margin-left: 30px;
 }
 
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-name {
+    margin-left: 10px;  /* Espacement entre le logo et le texte */
+    color: mediumseagreen;
+    font-size: 1.5em;  /* Ajustez selon votre préférence */
+}
+
 /* Style de la bannière */
 .banner {
     background-image: url('../img/Banner.png');
-    background-size: 100% auto; /* Ajuste la largeur à 100% et laisse la hauteur automatique */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image en arrière-plan */
-    height: 350px; /* Réglez la hauteur souhaitée de la bannière */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; /* Centre l'image horizontalement et verticalement */
+    background-origin: border-box; /* Garantit que l'image est centrée par rapport à la boîte de bordure */
+    height: 50vh;
+}
+/* Banner pour les écrans de taille moyenne */
+@media (max-width: 992px) {
+    .banner {
+        background-image: url('../img/Banner.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center; /* Centre l'image horizontalement et verticalement */
+        background-origin: border-box; /* Garantit que l'image est centrée par rapport à la boîte de bordure */
+        height: 50vh;
+    }
+}
+
+/* Banner pour les petits écrans */
+@media (max-width: 768px) {
+    .banner {
+        background-image: url('../img/Banner.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center; /* Centre l'image horizontalement et verticalement */
+        background-origin: border-box; /* Garantit que l'image est centrée par rapport à la boîte de bordure */
+        height: 50vh;
+    }
 }
 
 .book-box {
@@ -154,6 +184,7 @@ header h2 {
     padding: 15px;
     margin: 10px;
 }
+
 .book-box img {
     max-width: 100%;
     height: auto;
@@ -161,4 +192,104 @@ header h2 {
 
 .content-wrapper {
     margin-bottom: 100px; /* Ajoutez une marge inférieure pour éviter que le footer ne cache le contenu */
+}
+
+
+/* Styles pour #monNavUnique */
+
+
+#monNavUnique ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#monNavUnique li a {
+    color: #007dc7;
+    width: 100%;
+    padding: 20px;
+    border-left: 5px solid;
+    position: relative;
+    text-decoration: none;
+}
+
+
+#monNavUnique li a:hover {
+    border-bottom: 0px;
+    color: #fff;
+}
+
+#monNavUnique li:first-child a {
+    border-left: 10px solid #3498db;
+}
+
+#monNavUnique li:nth-child(2) a {
+    border-left: 10px solid #ffd071;
+}
+
+#monNavUnique li:nth-child(3) a {
+    border-left: 10px solid #f0776c;
+}
+
+#monNavUnique li:last-child a {
+    border-left: 10px solid #1abc9c;
+}
+
+#monNavUnique li a:after {
+    content: "";
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 0px;
+    position: absolute;
+    transition: all 0.3s ease 0s;
+}
+
+#monNavUnique li a:hover:after {
+    width: 100%;
+}
+
+#monNavUnique li:first-child a:after {
+    background: #3498db;
+}
+
+#monNavUnique li:nth-child(2) a:after {
+    background: #ffd071;
+}
+
+#monNavUnique li:nth-child(3) a:after {
+    background: #f0776c;
+}
+
+#monNavUnique li:last-child a:after {
+    background: #1abc9c;
+}
+
+
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Lato Hairline'), local('Lato-Hairline'), url(http://themes.googleusercontent.com/static/fonts/lato/v6/boeCNmOCCh-EWFLSfVffDg.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Lato Light'), local('Lato-Light'), url(http://themes.googleusercontent.com/static/fonts/lato/v6/KT3KS9Aol4WfR6Vas8kNcg.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Lato Regular'), local('Lato-Regular'), url(http://themes.googleusercontent.com/static/fonts/lato/v6/9k-RPmcnxYEPm8CNFsH2gg.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Lato Bold'), local('Lato-Bold'), url(http://themes.googleusercontent.com/static/fonts/lato/v6/wkfQbvfT_02e2IWO3yYueQ.woff) format('woff');
 }

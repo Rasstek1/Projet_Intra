@@ -18,9 +18,9 @@
 <body>
 
 <div id="footer" class="footer-container">
-    <!-- Section d'informations de l'entreprise à gauche -->
+
     <div class="footer-section">
-        <p>&copy; ${year} Votre Entreprise - Adresse de l'entreprise</p>
+        <p>&copy; ${year} Librairie Equinox - 102 de la mine, Gatineau, Quebec</p>
     </div>
 
     <!-- Section d'heure au centre -->

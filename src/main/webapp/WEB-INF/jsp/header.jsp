@@ -28,50 +28,51 @@
 </div>
 
 
+<!-- Header -->
+<header class="header-bg">
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/accueil">
+                <img src="${pageContext.request.contextPath}/img/Logo.png" alt="Logo" class="logo-img"/>
+                <h2 class="brand-name" style="color:mediumseagreen;">Librairie <span style="color:#007dc7; font-weight: bold;">Equinox</span> </h2>
+            </a>
 
-    <!-- Header -->
-    <header class="header-bg">
-        <!-- Barre de navigation -->
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/accueil">
-                    <img src="${pageContext.request.contextPath}/img/Logo.png" alt="Logo" class="logo-img"/>
-                </a>
-                <h2 class="brand-name" style="color:mediumseagreen;">Librairie Equinox</h2>
 
 
-                <!-- Bouton hamburger -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <!-- Bouton hamburger -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <nav id="monNavUnique">
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto pe-5">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/accueil">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/achat/listeLivres">Liste de
-                                livres</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/achat/listeLivres">Liste de livres</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/admin/ajouterLivre">Administration</a>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </div>
+    </nav>
+</header>
 
 
-    <!-- Bannière publicitaire -->
-    <div class="banner">
+<!-- Bannière publicitaire -->
+<div class="banner">
 
-    </div>
+</div>
 
-    <!-- Contenu de la page -->
-
+<!-- Contenu de la page -->
 
 
 </body>

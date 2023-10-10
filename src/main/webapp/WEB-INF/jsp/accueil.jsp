@@ -11,8 +11,12 @@
 <!-- Contenu de la page d'accueil -->
 <div class="content">
     <div class="container" style="margin-bottom: 200px; margin-top:50px;">
-        <h1>Bienvenue sur notre site</h1>
-        <p>Ceci est la page d'accueil de notre entreprise. Vous pouvez ajouter du contenu personnalisé ici.</p>
+        <h1>Bienvenue à la Librairie Equinox</h1>
+        <p>Plongez dans l'univers des livres et découvrez des histoires fascinantes, des connaissances inestimables<br>
+            et des mondes imaginaires. Que vous soyez un passionné de littérature, un étudiant en quête de savoir<br>
+            ou simplement un amateur de bonnes lectures, la Librairie Equinox est votre destination privilégiée pour<br>
+            des ouvrages de qualité. Parcourez notre collection variée et trouvez votre prochain coup de cœur !</p>
+
     </div>
 </div>
 
