@@ -72,13 +72,17 @@
         <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
-            <version>1.6.3</version> <!-- Vérifiez la version la plus récente sur Maven Central -->
-            <scope>test</scope>
+            <version>1.6.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.2</version>
         </dependency>
 
 
-
-            </dependencies>
+    </dependencies>
 
             <build>
                 <plugins>

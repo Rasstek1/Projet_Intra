@@ -108,12 +108,8 @@ body {
 }
 
 .footer-section #current-time {
-    font-size: 18px;            /* Taille de la police */
+    font-size: 12px;            /* Taille de la police */
     color: #f4f4f4;            /* Couleur de la police */
-    background-color: #333;    /* Couleur d'arrière-plan */
-    padding: 5px;             /* Espacement autour du texte */
-    border-radius: 5px;        /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre autour de l'heure */
 
 }
 
@@ -339,4 +335,24 @@ header h2 {
 }
 
 
+/************************************Notification TOAST********************************************/
+.toast {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background-color: #f0776c;
+    color: #fff;
+    border: 1px solid #444;
+}
 
+
+.toast {
+    border-radius: 3px;
+}
+.toast {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.toast {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

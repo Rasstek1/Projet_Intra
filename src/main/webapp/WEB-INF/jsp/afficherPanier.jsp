@@ -49,7 +49,8 @@
                                                     <div class="card-body">
                                                         <h5 class="card-title">${livre.titre}</h5>
                                                         <p class="card-text">Auteur: ${livre.auteur}</p>
-                                                        <p class="card-text">Prix: ${livre.prix}</p>
+                                                        <p class="card-text">Prix: <fmt:formatNumber value="${livre.prix}" type="currency" currencySymbol="$" /></p>
+
                                                         <p class="card-text">Quantité: ${livre.quantite}</p>
                                                         <a href="supprimerLivre?isbn=${livre.isbn}"
                                                            class="btn btn-danger">Supprimer</a>

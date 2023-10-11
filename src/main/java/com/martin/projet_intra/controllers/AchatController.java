@@ -7,8 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-
+import com.icegreen.greenmail.util.GreenMail;
 
 @Controller
 @RequestMapping("/achat")
@@ -19,6 +18,8 @@ public class AchatController {
     @Autowired
     private LibrairieDataContext librairieDataContext;
 
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/listeLivres")
     public String listeLivres(Model model, HttpSession session) {
@@ -145,7 +146,14 @@ public class AchatController {
             // Insérer les détails de la facture
             librairieDataContext.insertDetailsFacture(dernierNumFacture, isbn, livreAchete.getPrix());
         }
-
+/*envois du email avec Greenmail*/
+        try {
+            emailService.sendEmail(email, "Confirmation de paiement", "Merci pour votre achat! Votre paiement a été confirmé.");
+            model.addAttribute("emailSent", true);
+        } catch (Exception e) {
+            model.addAttribute("emailSent", false);
+            e.printStackTrace();
+        }
         panier.getListe().clear();
         session.removeAttribute("panier");
         return "confirmation";

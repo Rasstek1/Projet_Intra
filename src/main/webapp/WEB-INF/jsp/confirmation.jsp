@@ -17,12 +17,31 @@
     </div>
 </div>
 
-<% if (Boolean.TRUE.equals(request.getAttribute("emailSent"))) { %>
-<p>Un courriel de confirmation a été envoyé à votre adresse.</p>
-<% } else { %>
-<p>Désolé, nous n'avons pas pu envoyer le courriel de confirmation. Veuillez vérifier votre boîte de réception
-    ultérieurement ou nous contacter.</p>
-<% } %>
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+    <div class="toast-header">
+        <strong class="mr-auto">Notification</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body">
+        <% if (Boolean.TRUE.equals(request.getAttribute("emailSent"))) { %>
+        Un courriel de confirmation a été envoyé à votre adresse.
+        <% } else { %>
+        Désolé, nous n'avons pas pu envoyer le courriel de confirmation. Veuillez vérifier votre boîte de réception ultérieurement ou nous contacter.
+        <% } %>
+    </div>
+</div>
+
 <jsp:include page="footer.jsp"/>
+
+<script>
+    $(document).ready(function(){
+        $('.toast').toast('show');
+    });
+</script>
+
+
+
 </body>
 </html>
