@@ -10,6 +10,7 @@ import java.util.Date;
 @Controller
 public class DateController {
 
+
     @GetMapping("/current-time")
     public String showCurrentTime(Model model) {
         SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

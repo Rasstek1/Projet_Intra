@@ -38,7 +38,7 @@
     display: flex;
     justify-content: center; /* Centre les éléments horizontalement */
     width: 100%;
-    color: #ffd071;
+    color: white;
 }
 
 .heures p {
@@ -55,13 +55,29 @@ body {
 }
 
 .content {
-    margin-left:6%; /* Marge à gauche */
-    margin-right:6%; /* Marge à droite */
+    margin-left:15%; /* Marge à gauche */
+    margin-right:15%; /* Marge à droite */
     background-color: white;
     padding-bottom: 100px;
     border: 1px solid #ddd;
 }
-
+.welcome{
+    border: 3px solid #ddd;
+    padding: 20px;
+    max-width: 100%;
+    background-color:paleturquoise;
+}
+.confirm{
+    margin: auto;
+    max-width: 80%;
+    padding: 20px; /* 10px est le padding vertical (haut/bas) et 5px est le padding horizontal (gauche/droit) */
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:paleturquoise;
+}
 #footer {
     background-color: #4c4c4c;
     padding: 20px;
@@ -108,7 +124,7 @@ body {
 }
 
 .footer-section #current-time {
-    font-size: 12px;            /* Taille de la police */
+    font-size: 14px;            /* Taille de la police */
     color: #f4f4f4;            /* Couleur de la police */
 
 }
@@ -341,12 +357,16 @@ header h2 {
     top: 20px;
     right: 20px;
     z-index: 9999;
-    background-color: #f0776c;
+    background-color: #3498db;
     color: #fff;
     border: 1px solid #444;
 }
 
-
+.toast .close {
+    position: absolute;
+    top: 5px; /* ou ajustez selon votre besoin */
+    right: 10px; /* ou ajustez selon votre besoin */
+}
 .toast {
     border-radius: 3px;
 }
@@ -355,4 +375,20 @@ header h2 {
 }
 .toast {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+/******accueil***********/
+.custom-links a {
+    text-decoration: none;  /* Suppression du soulignement */
+    font-weight: bold;      /* Texte en gras */
+}
+.custom-title, .custom-desc {
+    text-align: center;  /* Centrer le titre et la description */
+}
+.custom-images img {
+    vertical-align: bottom;  /* Aligner les images en bas */
+
+
+}
+.custom-images {
+    margin-left:50px;
 }

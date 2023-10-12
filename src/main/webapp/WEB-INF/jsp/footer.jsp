@@ -18,15 +18,15 @@
 <body>
 
 <div id="footer" class="footer-container">
-
+    <div class="footer-section">
+        <p id="current-time"></p>
+    </div>
     <div class="footer-section">
         <p>&copy; ${year} Librairie Equinox - 102 de la mine, Gatineau, Quebec</p>
     </div>
 
     <!-- Section d'heure au centre -->
-    <div class="footer-section">
-        <p id="current-time"></p>
-    </div>
+
 
     <!-- Liens à droite -->
     <div class="footer-section">

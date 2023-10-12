@@ -10,10 +10,11 @@
 <jsp:include page="header.jsp"/>
 
 <div class="content">
-    <div class="container" style="margin-bottom: 200px; margin-top:50px;">
-
+    <div class="container" style="margin-bottom: 200px; margin-top:20px;">
+<div class="confirm">
         <h1>Confirmation de Paiement</h1>
         <p>Votre paiement a été traité avec succès. Merci pour votre achat !</p>
+</div>
     </div>
 </div>
 
