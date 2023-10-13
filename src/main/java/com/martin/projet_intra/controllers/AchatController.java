@@ -21,13 +21,14 @@ public class AchatController {
     @Autowired
     private EmailService emailService;
 
+    // Cette méthode affiche la liste des livres disponibles
     @GetMapping("/listeLivres")
     public String listeLivres(Model model, HttpSession session) {
         model.addAttribute("livres", librairieDataContext.selectLivres());
         getPanier(session); // S'assure que le panier est initialisé
         return "listeLivres";
     }
-
+    // Crée un nouveau panier si aucun n'existe
     private Panier getPanier(HttpSession session) {
         Panier panier = (Panier) session.getAttribute("panier");
         if (panier == null) {
@@ -79,11 +80,6 @@ public class AchatController {
 
 
 
-
-
-
-
-
     @GetMapping("/afficherPanier")
     public String afficherPanier(Model model, HttpSession session) {
         model.addAttribute("panier", getPanier(session));
@@ -102,18 +98,14 @@ public class AchatController {
         return "redirect:/achat/afficherPanier";
     }
 
-
-
-
-
-
+    // Cette méthode affiche le formulaire de paiement
     @GetMapping("/paiement")
     public String paiementForm() {
         return "paiement";
     }
 
 
-
+    // Cette méthode gère le traitement du paiement
     @PostMapping("/paiement")
     public String paiementProcessing(
             @RequestParam String telephone,
@@ -146,7 +138,7 @@ public class AchatController {
             // Insérer les détails de la facture
             librairieDataContext.insertDetailsFacture(dernierNumFacture, isbn, livreAchete.getPrix());
         }
-/*envois du email avec Greenmail*/
+        /*envois du email avec Greenmail*/
         try {
             emailService.sendEmail(email, "Confirmation de paiement", "Merci pour votre achat! Votre paiement a été confirmé.");
             model.addAttribute("emailSent", true);
@@ -158,9 +150,6 @@ public class AchatController {
         session.removeAttribute("panier");
         return "confirmation";
     }
-
-
-
 
 
 
@@ -178,5 +167,17 @@ public class AchatController {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
